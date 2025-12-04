@@ -1,51 +1,34 @@
 # GymSync API
 
-REST API backend for GymSync mobile application. This API provides CRUD operations for managing users, recipes, meals, gym classes, and class inscriptions.
+Backend REST API for the GymSync mobile application.
 
-## Deployed API URL
+## API URL
 
-**Production:** `[URL will be added after deployment]`
+Production: `[URL will be added after deployment]`
 
-**Local Development:** `http://localhost:3000`
+Local: `http://localhost:3000`
 
-## Technology Stack
+## Setup
 
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Data Storage:** In-memory (MemoryManager)
-- **CORS:** Enabled for all origins
-
-## Installation & Setup
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm
-
-### Local Development
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd gymsync-api
-```
-
-2. Install dependencies:
+Install dependencies:
 ```bash
 npm install
 ```
 
-3. Start the server:
+Run the server:
 ```bash
 npm start
 ```
 
-The API will be running at `http://localhost:3000`
+## Technology
 
-## API Response Format
+- Node.js
+- Express.js
+- In-memory storage
 
-All endpoints follow this response format:
+## Response Format
 
-### Success Response
+Success:
 ```json
 {
   "data": { ... },
@@ -54,7 +37,7 @@ All endpoints follow this response format:
 }
 ```
 
-### Error Response
+Error:
 ```json
 {
   "responseCode": 400,
@@ -62,14 +45,12 @@ All endpoints follow this response format:
 }
 ```
 
-## API Endpoints
+## Endpoints
 
-### Root Endpoint
+### GET /
+API information.
 
-#### GET /
-Get API information and available endpoints.
-
-**Response:**
+Response:
 ```json
 {
   "message": "GymSync API - Mobile App Backend",
