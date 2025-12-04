@@ -1,0 +1,17 @@
+{
+  "name": "gymsync-api",
+  "version": "1.0.0",
+  "description": "GymSync REST API - Backend for mobile application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["gym", "fitness", "api", "rest"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}
