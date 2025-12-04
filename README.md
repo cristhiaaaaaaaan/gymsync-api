@@ -4,7 +4,7 @@ Backend REST API for the GymSync mobile application.
 
 ## API URL
 
-Production: `[URL will be added after deployment]`
+Production: `https://gymsync-api.onrender.com`
 
 Local: `http://localhost:3000`
 
