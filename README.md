@@ -54,13 +54,11 @@ Response:
 ```json
 {
   "message": "GymSync API - Mobile App Backend",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "endpoints": {
-    "users": "/users",
-    "recipes": "/recipes",
-    "meals": "/meals",
-    "classes": "/classes",
-    "inscriptions": "/inscriptions"
+    "ejercicios": "/ejercicios",
+    "rutinas": "/rutinas",
+    "membresias": "/membresias"
   },
   "documentation": "See README.md for full API documentation"
 }
@@ -68,140 +66,10 @@ Response:
 
 ---
 
-## 1. Users Endpoints
+## 1. Ejercicios Endpoints
 
-### GET /users
-Get all users.
-
-**Response:**
-```json
-{
-  "data": [
-    {
-      "id": "1",
-      "name": "Juan",
-      "fLastName": "Pérez",
-      "sLastName": "González",
-      "password": "password123",
-      "email": "juan@example.com"
-    }
-  ],
-  "responseCode": 200,
-  "message": "Users retrieved successfully"
-}
-```
-
-### GET /users/:id
-Get a specific user by ID.
-
-**Parameters:**
-- `id` (string) - User ID
-
-**Response:**
-```json
-{
-  "data": {
-    "id": "1",
-    "name": "Juan",
-    "fLastName": "Pérez",
-    "sLastName": "González",
-    "password": "password123",
-    "email": "juan@example.com"
-  },
-  "responseCode": 200,
-  "message": "User retrieved successfully"
-}
-```
-
-### POST /users
-Create a new user.
-
-**Request Body:**
-```json
-{
-  "id": "3",
-  "name": "Carlos",
-  "fLastName": "Ramírez",
-  "sLastName": "Torres",
-  "password": "securepass",
-  "email": "carlos@example.com"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "id": "3",
-    "name": "Carlos",
-    "fLastName": "Ramírez",
-    "sLastName": "Torres",
-    "password": "securepass",
-    "email": "carlos@example.com"
-  },
-  "responseCode": 201,
-  "message": "User created successfully"
-}
-```
-
-### PUT /users/:id
-Update an existing user.
-
-**Parameters:**
-- `id` (string) - User ID
-
-**Request Body (all fields optional):**
-```json
-{
-  "name": "Carlos Updated",
-  "email": "newemail@example.com"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "id": "3",
-    "name": "Carlos Updated",
-    "fLastName": "Ramírez",
-    "sLastName": "Torres",
-    "password": "securepass",
-    "email": "newemail@example.com"
-  },
-  "responseCode": 200,
-  "message": "User updated successfully"
-}
-```
-
-### DELETE /users/:id
-Delete a user.
-
-**Parameters:**
-- `id` (string) - User ID
-
-**Response:**
-```json
-{
-  "data": {
-    "id": "3",
-    "name": "Carlos",
-    "fLastName": "Ramírez",
-    "sLastName": "Torres",
-    "password": "securepass",
-    "email": "carlos@example.com"
-  },
-  "responseCode": 200,
-  "message": "User deleted successfully"
-}
-```
-
----
-
-## 2. Recipes Endpoints
-
-### GET /recipes
-Get all recipes.
+### GET /ejercicios
+Get all exercises.
 
 **Response:**
 ```json
@@ -209,64 +77,183 @@ Get all recipes.
   "data": [
     {
       "id": "1",
-      "name": "Ensalada de Pollo",
-      "description": "Ensalada saludable con pechuga de pollo",
-      "prepTime": 15,
-      "cookTime": 10,
-      "difficulty": "Fácil",
-      "servings": 2,
-      "category": "Saludable",
-      "steps": "1. Cocinar el pollo. 2. Cortar verduras. 3. Mezclar todo.",
-      "ingredients": ["Pollo 200g", "Lechuga", "Tomate", "Aceite de oliva"]
+      "nombre": "Press de Banca",
+      "series": 4,
+      "repeticiones": 10,
+      "pesoRecomendado": 60,
+      "notas": "Mantener espalda pegada al banco"
     }
   ],
   "responseCode": 200,
-  "message": "Recipes retrieved successfully"
+  "message": "Ejercicios retrieved successfully"
 }
 ```
 
-### GET /recipes/:id
-Get a specific recipe by ID.
+### GET /ejercicios/:id
+Get a specific exercise by ID.
 
 **Parameters:**
-- `id` (string) - Recipe ID
+- `id` (string) - Exercise ID
 
 **Response:**
 ```json
 {
   "data": {
     "id": "1",
-    "name": "Ensalada de Pollo",
-    "description": "Ensalada saludable con pechuga de pollo",
-    "prepTime": 15,
-    "cookTime": 10,
-    "difficulty": "Fácil",
-    "servings": 2,
-    "category": "Saludable",
-    "steps": "1. Cocinar el pollo. 2. Cortar verduras. 3. Mezclar todo.",
-    "ingredients": ["Pollo 200g", "Lechuga", "Tomate", "Aceite de oliva"]
+    "nombre": "Press de Banca",
+    "series": 4,
+    "repeticiones": 10,
+    "pesoRecomendado": 60,
+    "notas": "Mantener espalda pegada al banco"
   },
   "responseCode": 200,
-  "message": "Recipe retrieved successfully"
+  "message": "Ejercicio retrieved successfully"
 }
 ```
 
-### POST /recipes
-Create a new recipe.
+### POST /ejercicios
+Create a new exercise.
+
+**Request Body:**
+```json
+{
+  "id": "4",
+  "nombre": "Curl de Biceps",
+  "series": 3,
+  "repeticiones": 12,
+  "pesoRecomendado": 15,
+  "notas": "Evitar balancear el cuerpo"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "4",
+    "nombre": "Curl de Biceps",
+    "series": 3,
+    "repeticiones": 12,
+    "pesoRecomendado": 15,
+    "notas": "Evitar balancear el cuerpo"
+  },
+  "responseCode": 201,
+  "message": "Ejercicio created successfully"
+}
+```
+
+### PUT /ejercicios/:id
+Update an existing exercise.
+
+**Parameters:**
+- `id` (string) - Exercise ID
+
+**Request Body (all fields optional):**
+```json
+{
+  "series": 4,
+  "repeticiones": 15,
+  "pesoRecomendado": 20
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "4",
+    "nombre": "Curl de Biceps",
+    "series": 4,
+    "repeticiones": 15,
+    "pesoRecomendado": 20,
+    "notas": "Evitar balancear el cuerpo"
+  },
+  "responseCode": 200,
+  "message": "Ejercicio updated successfully"
+}
+```
+
+### DELETE /ejercicios/:id
+Delete an exercise.
+
+**Parameters:**
+- `id` (string) - Exercise ID
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "4",
+    "nombre": "Curl de Biceps",
+    "series": 4,
+    "repeticiones": 15,
+    "pesoRecomendado": 20,
+    "notas": "Evitar balancear el cuerpo"
+  },
+  "responseCode": 200,
+  "message": "Ejercicio deleted successfully"
+}
+```
+
+---
+
+## 2. Rutinas Endpoints
+
+### GET /rutinas
+Get all workout routines.
+
+**Response:**
+```json
+{
+  "data": [
+    {
+      "id": "1",
+      "usuarioId": "user1",
+      "fecha": "2025-12-04T04:35:05.055Z",
+      "nombre": "Rutina Pecho y Triceps",
+      "ejercicios": ["1", "2"],
+      "completada": false
+    }
+  ],
+  "responseCode": 200,
+  "message": "Rutinas retrieved successfully"
+}
+```
+
+### GET /rutinas/:id
+Get a specific routine by ID.
+
+**Parameters:**
+- `id` (string) - Routine ID
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "1",
+    "usuarioId": "user1",
+    "fecha": "2025-12-04T04:35:05.055Z",
+    "nombre": "Rutina Pecho y Triceps",
+    "ejercicios": ["1", "2"],
+    "completada": false
+  },
+  "responseCode": 200,
+  "message": "Rutina retrieved successfully"
+}
+```
+
+### POST /rutinas
+Create a new routine.
 
 **Request Body:**
 ```json
 {
   "id": "3",
-  "name": "Smoothie Verde",
-  "description": "Batido nutritivo",
-  "prepTime": 5,
-  "cookTime": 0,
-  "difficulty": "Muy Fácil",
-  "servings": 1,
-  "category": "Bebida",
-  "steps": "1. Mezclar todo en licuadora.",
-  "ingredients": ["Espinaca", "Plátano", "Agua"]
+  "usuarioId": "user2",
+  "fecha": "2025-12-04T10:00:00.000Z",
+  "nombre": "Rutina Espalda",
+  "ejercicios": ["3"],
+  "completada": false
 }
 ```
 
@@ -275,32 +262,28 @@ Create a new recipe.
 {
   "data": {
     "id": "3",
-    "name": "Smoothie Verde",
-    "description": "Batido nutritivo",
-    "prepTime": 5,
-    "cookTime": 0,
-    "difficulty": "Muy Fácil",
-    "servings": 1,
-    "category": "Bebida",
-    "steps": "1. Mezclar todo en licuadora.",
-    "ingredients": ["Espinaca", "Plátano", "Agua"]
+    "usuarioId": "user2",
+    "fecha": "2025-12-04T10:00:00.000Z",
+    "nombre": "Rutina Espalda",
+    "ejercicios": ["3"],
+    "completada": false
   },
   "responseCode": 201,
-  "message": "Recipe created successfully"
+  "message": "Rutina created successfully"
 }
 ```
 
-### PUT /recipes/:id
-Update an existing recipe.
+### PUT /rutinas/:id
+Update an existing routine.
 
 **Parameters:**
-- `id` (string) - Recipe ID
+- `id` (string) - Routine ID
 
 **Request Body (all fields optional):**
 ```json
 {
-  "name": "Smoothie Verde Mejorado",
-  "servings": 2
+  "completada": true,
+  "nombre": "Rutina Espalda y Biceps"
 }
 ```
 
@@ -309,103 +292,101 @@ Update an existing recipe.
 {
   "data": {
     "id": "3",
-    "name": "Smoothie Verde Mejorado",
-    "description": "Batido nutritivo",
-    "prepTime": 5,
-    "cookTime": 0,
-    "difficulty": "Muy Fácil",
-    "servings": 2,
-    "category": "Bebida",
-    "steps": "1. Mezclar todo en licuadora.",
-    "ingredients": ["Espinaca", "Plátano", "Agua"]
+    "usuarioId": "user2",
+    "fecha": "2025-12-04T10:00:00.000Z",
+    "nombre": "Rutina Espalda y Biceps",
+    "ejercicios": ["3"],
+    "completada": true
   },
   "responseCode": 200,
-  "message": "Recipe updated successfully"
+  "message": "Rutina updated successfully"
 }
 ```
 
-### DELETE /recipes/:id
-Delete a recipe.
+### DELETE /rutinas/:id
+Delete a routine.
 
 **Parameters:**
-- `id` (string) - Recipe ID
+- `id` (string) - Routine ID
 
 **Response:**
 ```json
 {
   "data": {
     "id": "3",
-    "name": "Smoothie Verde",
-    "description": "Batido nutritivo",
-    "prepTime": 5,
-    "cookTime": 0,
-    "difficulty": "Muy Fácil",
-    "servings": 1,
-    "category": "Bebida",
-    "steps": "1. Mezclar todo en licuadora.",
-    "ingredients": ["Espinaca", "Plátano", "Agua"]
+    "usuarioId": "user2",
+    "fecha": "2025-12-04T10:00:00.000Z",
+    "nombre": "Rutina Espalda y Biceps",
+    "ejercicios": ["3"],
+    "completada": true
   },
   "responseCode": 200,
-  "message": "Recipe deleted successfully"
+  "message": "Rutina deleted successfully"
 }
 ```
 
 ---
 
-## 3. Meals Endpoints
+## 3. Membresias Endpoints
 
-### GET /meals
-Get all meals.
+### GET /membresias
+Get all memberships.
 
 **Response:**
 ```json
 {
   "data": [
     {
-      "id": 1,
-      "name": "Desayuno Proteico",
-      "quantity": 1,
-      "deliveryDate": "05/12/2025",
-      "notes": "Con frutas"
+      "id": "1",
+      "usuarioId": "user1",
+      "tipo": "Premium",
+      "fechaInicio": "2025-12-04T04:35:05.060Z",
+      "fechaVencimiento": "2026-01-04T04:35:05.060Z",
+      "activa": true,
+      "monto": 50
     }
   ],
   "responseCode": 200,
-  "message": "Meals retrieved successfully"
+  "message": "Membresias retrieved successfully"
 }
 ```
 
-### GET /meals/:id
-Get a specific meal by ID.
+### GET /membresias/:id
+Get a specific membership by ID.
 
 **Parameters:**
-- `id` (number) - Meal ID
+- `id` (string) - Membership ID
 
 **Response:**
 ```json
 {
   "data": {
-    "id": 1,
-    "name": "Desayuno Proteico",
-    "quantity": 1,
-    "deliveryDate": "05/12/2025",
-    "notes": "Con frutas"
+    "id": "1",
+    "usuarioId": "user1",
+    "tipo": "Premium",
+    "fechaInicio": "2025-12-04T04:35:05.060Z",
+    "fechaVencimiento": "2026-01-04T04:35:05.060Z",
+    "activa": true,
+    "monto": 50
   },
   "responseCode": 200,
-  "message": "Meal retrieved successfully"
+  "message": "Membresia retrieved successfully"
 }
 ```
 
-### POST /meals
-Create a new meal.
+### POST /membresias
+Create a new membership.
 
 **Request Body:**
 ```json
 {
-  "id": 3,
-  "name": "Cena Ligera",
-  "quantity": 1,
-  "deliveryDate": "06/12/2025",
-  "notes": "Sin sal"
+  "id": "3",
+  "usuarioId": "user3",
+  "tipo": "VIP",
+  "fechaInicio": "2025-12-04T10:00:00.000Z",
+  "fechaVencimiento": "2026-03-04T10:00:00.000Z",
+  "activa": true,
+  "monto": 100
 }
 ```
 
@@ -413,28 +394,30 @@ Create a new meal.
 ```json
 {
   "data": {
-    "id": 3,
-    "name": "Cena Ligera",
-    "quantity": 1,
-    "deliveryDate": "06/12/2025",
-    "notes": "Sin sal"
+    "id": "3",
+    "usuarioId": "user3",
+    "tipo": "VIP",
+    "fechaInicio": "2025-12-04T10:00:00.000Z",
+    "fechaVencimiento": "2026-03-04T10:00:00.000Z",
+    "activa": true,
+    "monto": 100
   },
   "responseCode": 201,
-  "message": "Meal created successfully"
+  "message": "Membresia created successfully"
 }
 ```
 
-### PUT /meals/:id
-Update an existing meal.
+### PUT /membresias/:id
+Update an existing membership.
 
 **Parameters:**
-- `id` (number) - Meal ID
+- `id` (string) - Membership ID
 
 **Request Body (all fields optional):**
 ```json
 {
-  "quantity": 2,
-  "notes": "Con ensalada extra"
+  "activa": false,
+  "fechaVencimiento": "2026-06-04T10:00:00.000Z"
 }
 ```
 
@@ -442,307 +425,39 @@ Update an existing meal.
 ```json
 {
   "data": {
-    "id": 3,
-    "name": "Cena Ligera",
-    "quantity": 2,
-    "deliveryDate": "06/12/2025",
-    "notes": "Con ensalada extra"
+    "id": "3",
+    "usuarioId": "user3",
+    "tipo": "VIP",
+    "fechaInicio": "2025-12-04T10:00:00.000Z",
+    "fechaVencimiento": "2026-06-04T10:00:00.000Z",
+    "activa": false,
+    "monto": 100
   },
   "responseCode": 200,
-  "message": "Meal updated successfully"
+  "message": "Membresia updated successfully"
 }
 ```
 
-### DELETE /meals/:id
-Delete a meal.
+### DELETE /membresias/:id
+Delete a membership.
 
 **Parameters:**
-- `id` (number) - Meal ID
+- `id` (string) - Membership ID
 
 **Response:**
 ```json
 {
   "data": {
-    "id": 3,
-    "name": "Cena Ligera",
-    "quantity": 2,
-    "deliveryDate": "06/12/2025",
-    "notes": "Con ensalada extra"
+    "id": "3",
+    "usuarioId": "user3",
+    "tipo": "VIP",
+    "fechaInicio": "2025-12-04T10:00:00.000Z",
+    "fechaVencimiento": "2026-06-04T10:00:00.000Z",
+    "activa": false,
+    "monto": 100
   },
   "responseCode": 200,
-  "message": "Meal deleted successfully"
-}
-```
-
----
-
-## 4. Classes Endpoints
-
-### GET /classes
-Get all gym classes.
-
-**Response:**
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "title": "Yoga Matutino",
-      "schedule": "Lunes 7:00 AM",
-      "professor": "Ana García"
-    }
-  ],
-  "responseCode": 200,
-  "message": "Classes retrieved successfully"
-}
-```
-
-### GET /classes/:id
-Get a specific class by ID.
-
-**Parameters:**
-- `id` (number) - Class ID
-
-**Response:**
-```json
-{
-  "data": {
-    "id": 1,
-    "title": "Yoga Matutino",
-    "schedule": "Lunes 7:00 AM",
-    "professor": "Ana García"
-  },
-  "responseCode": 200,
-  "message": "Class retrieved successfully"
-}
-```
-
-### POST /classes
-Create a new class.
-
-**Request Body:**
-```json
-{
-  "id": 4,
-  "title": "Pilates",
-  "schedule": "Jueves 8:00 AM",
-  "professor": "Roberto Sánchez"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "id": 4,
-    "title": "Pilates",
-    "schedule": "Jueves 8:00 AM",
-    "professor": "Roberto Sánchez"
-  },
-  "responseCode": 201,
-  "message": "Class created successfully"
-}
-```
-
-### PUT /classes/:id
-Update an existing class.
-
-**Parameters:**
-- `id` (number) - Class ID
-
-**Request Body (all fields optional):**
-```json
-{
-  "schedule": "Jueves 9:00 AM",
-  "professor": "María López"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "id": 4,
-    "title": "Pilates",
-    "schedule": "Jueves 9:00 AM",
-    "professor": "María López"
-  },
-  "responseCode": 200,
-  "message": "Class updated successfully"
-}
-```
-
-### DELETE /classes/:id
-Delete a class.
-
-**Parameters:**
-- `id` (number) - Class ID
-
-**Response:**
-```json
-{
-  "data": {
-    "id": 4,
-    "title": "Pilates",
-    "schedule": "Jueves 9:00 AM",
-    "professor": "María López"
-  },
-  "responseCode": 200,
-  "message": "Class deleted successfully"
-}
-```
-
----
-
-## 5. Inscriptions Endpoints
-
-### GET /inscriptions
-Get all inscriptions.
-
-**Response:**
-```json
-{
-  "data": [
-    {
-      "inscriptionId": "1",
-      "personId": "1",
-      "personEmail": "juan@example.com",
-      "courseName": "Fitness Básico",
-      "trainingName": "CrossFit",
-      "schedule": "Martes 6:00 PM"
-    }
-  ],
-  "responseCode": 200,
-  "message": "Inscriptions retrieved successfully"
-}
-```
-
-### GET /inscriptions/:id
-Get a specific inscription by ID.
-
-**Parameters:**
-- `id` (string) - Inscription ID
-
-**Response:**
-```json
-{
-  "data": {
-    "inscriptionId": "1",
-    "personId": "1",
-    "personEmail": "juan@example.com",
-    "courseName": "Fitness Básico",
-    "trainingName": "CrossFit",
-    "schedule": "Martes 6:00 PM"
-  },
-  "responseCode": 200,
-  "message": "Inscription retrieved successfully"
-}
-```
-
-### GET /inscriptions/person/:personId
-Get all inscriptions for a specific person.
-
-**Parameters:**
-- `personId` (string) - Person ID
-
-**Response:**
-```json
-{
-  "data": [
-    {
-      "inscriptionId": "1",
-      "personId": "1",
-      "personEmail": "juan@example.com",
-      "courseName": "Fitness Básico",
-      "trainingName": "CrossFit",
-      "schedule": "Martes 6:00 PM"
-    }
-  ],
-  "responseCode": 200,
-  "message": "Inscriptions retrieved successfully"
-}
-```
-
-### POST /inscriptions
-Create a new inscription.
-
-**Request Body:**
-```json
-{
-  "inscriptionId": "3",
-  "personId": "3",
-  "personEmail": "carlos@example.com",
-  "courseName": "Wellness",
-  "trainingName": "Yoga Matutino",
-  "schedule": "Lunes 7:00 AM"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "inscriptionId": "3",
-    "personId": "3",
-    "personEmail": "carlos@example.com",
-    "courseName": "Wellness",
-    "trainingName": "Yoga Matutino",
-    "schedule": "Lunes 7:00 AM"
-  },
-  "responseCode": 201,
-  "message": "Inscription created successfully"
-}
-```
-
-### PUT /inscriptions/:id
-Update an existing inscription.
-
-**Parameters:**
-- `id` (string) - Inscription ID
-
-**Request Body (all fields optional):**
-```json
-{
-  "courseName": "Fitness Avanzado",
-  "schedule": "Lunes 8:00 AM"
-}
-```
-
-**Response:**
-```json
-{
-  "data": {
-    "inscriptionId": "3",
-    "personId": "3",
-    "personEmail": "carlos@example.com",
-    "courseName": "Fitness Avanzado",
-    "trainingName": "Yoga Matutino",
-    "schedule": "Lunes 8:00 AM"
-  },
-  "responseCode": 200,
-  "message": "Inscription updated successfully"
-}
-```
-
-### DELETE /inscriptions/:id
-Delete an inscription.
-
-**Parameters:**
-- `id` (string) - Inscription ID
-
-**Response:**
-```json
-{
-  "data": {
-    "inscriptionId": "3",
-    "personId": "3",
-    "personEmail": "carlos@example.com",
-    "courseName": "Fitness Avanzado",
-    "trainingName": "Yoga Matutino",
-    "schedule": "Lunes 8:00 AM"
-  },
-  "responseCode": 200,
-  "message": "Inscription deleted successfully"
+  "message": "Membresia deleted successfully"
 }
 ```
 
@@ -759,7 +474,7 @@ Delete an inscription.
 ## Testing with Postman
 
 1. Import the collection or create requests manually
-2. Set the base URL to `http://localhost:3000` (local) or the deployed URL
+2. Set the base URL to `http://localhost:3000` (local) or `https://gymsync-api.onrender.com` (production)
 3. For POST and PUT requests, set the header: `Content-Type: application/json`
 4. Use the JSON examples provided above for request bodies
 
@@ -767,8 +482,8 @@ Delete an inscription.
 
 - This API uses in-memory storage. All data will be reset when the server restarts.
 - CORS is enabled for all origins.
-- All dates use the format `dd/MM/yyyy`.
-- IDs for Users, Recipes, and Inscriptions are strings. IDs for Meals and Classes are numbers.
+- All IDs are strings.
+- Dates are stored as ISO 8601 format.
 
 ## License
 
