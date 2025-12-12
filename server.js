@@ -4,6 +4,7 @@ const cors = require('cors');
 const ejercicioRoutes = require('./routes/ejercicioRoutes');
 const rutinaRoutes = require('./routes/rutinaRoutes');
 const membresiaRoutes = require('./routes/membresiaRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,8 +15,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.json({
         message: "GymSync API - Mobile App Backend",
-        version: "2.0.0",
+        version: "2.1.0",
         endpoints: {
+            users: "/users",
             ejercicios: "/ejercicios",
             rutinas: "/rutinas",
             membresias: "/membresias"
@@ -24,6 +26,7 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use('/users', userRoutes);
 app.use('/ejercicios', ejercicioRoutes);
 app.use('/rutinas', rutinaRoutes);
 app.use('/membresias', membresiaRoutes);

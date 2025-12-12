@@ -54,8 +54,9 @@ Response:
 ```json
 {
   "message": "GymSync API - Mobile App Backend",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "endpoints": {
+    "users": "/users",
     "ejercicios": "/ejercicios",
     "rutinas": "/rutinas",
     "membresias": "/membresias"
@@ -66,7 +67,160 @@ Response:
 
 ---
 
-## 1. Ejercicios Endpoints
+## 1. Users Endpoints (Authentication)
+
+### GET /users
+Get all users.
+
+**Response:**
+```json
+{
+  "data": [
+    {
+      "id": "user123",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "fotoPerfil": "",
+      "fechaRegistro": "2025-12-09T10:00:00.000Z"
+    }
+  ],
+  "responseCode": 200,
+  "message": "Users retrieved successfully"
+}
+```
+
+### GET /users/:id
+Get a specific user by ID.
+
+**Parameters:**
+- `id` (string) - User ID
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "user123",
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "fotoPerfil": "",
+    "fechaRegistro": "2025-12-09T10:00:00.000Z"
+  },
+  "responseCode": 200,
+  "message": "User retrieved successfully"
+}
+```
+
+### GET /users/email/:email
+Get a user by email (useful for login).
+
+**Parameters:**
+- `email` (string) - User email
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "user123",
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "fotoPerfil": "",
+    "fechaRegistro": "2025-12-09T10:00:00.000Z"
+  },
+  "responseCode": 200,
+  "message": "User retrieved successfully"
+}
+```
+
+### POST /users
+Create a new user (Register).
+
+**Request Body:**
+```json
+{
+  "id": "user456",
+  "name": "María García",
+  "email": "maria@example.com",
+  "fotoPerfil": "",
+  "fechaRegistro": "2025-12-09T10:00:00.000Z"
+}
+```
+
+**Response (Success):**
+```json
+{
+  "data": {
+    "id": "user456",
+    "name": "María García",
+    "email": "maria@example.com",
+    "fotoPerfil": "",
+    "fechaRegistro": "2025-12-09T10:00:00.000Z"
+  },
+  "responseCode": 201,
+  "message": "User created successfully"
+}
+```
+
+**Response (Email already exists):**
+```json
+{
+  "responseCode": 400,
+  "message": "Email already registered"
+}
+```
+
+### PUT /users/:id
+Update an existing user.
+
+**Parameters:**
+- `id` (string) - User ID
+
+**Request Body (all fields optional):**
+```json
+{
+  "name": "María García López",
+  "fotoPerfil": "https://example.com/photo.jpg"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "user456",
+    "name": "María García López",
+    "email": "maria@example.com",
+    "fotoPerfil": "https://example.com/photo.jpg",
+    "fechaRegistro": "2025-12-09T10:00:00.000Z"
+  },
+  "responseCode": 200,
+  "message": "User updated successfully"
+}
+```
+
+### DELETE /users/:id
+Delete a user.
+
+**Parameters:**
+- `id` (string) - User ID
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "user456",
+    "name": "María García López",
+    "email": "maria@example.com",
+    "fotoPerfil": "https://example.com/photo.jpg",
+    "fechaRegistro": "2025-12-09T10:00:00.000Z"
+  },
+  "responseCode": 200,
+  "message": "User deleted successfully"
+}
+```
+
+---
+
+## 2. Ejercicios Endpoints
 
 ### GET /ejercicios
 Get all exercises.
@@ -197,7 +351,7 @@ Delete an exercise.
 
 ---
 
-## 2. Rutinas Endpoints
+## 3. Rutinas Endpoints
 
 ### GET /rutinas
 Get all workout routines.
@@ -327,7 +481,7 @@ Delete a routine.
 
 ---
 
-## 3. Membresias Endpoints
+## 4. Membresias Endpoints
 
 ### GET /membresias
 Get all memberships.
