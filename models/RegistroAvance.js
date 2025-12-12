@@ -1,6 +1,6 @@
 class RegistroAvance {
     constructor(id = "", ejercicioId = "", usuarioId = "", fecha = new Date(),
-                pesoUtilizado = 0.0, repeticionesRealizadas = 0, seriesCompletadas = 0) {
+                pesoUtilizado = 0.0, repeticionesRealizadas = 0, seriesCompletadas = 0, notas = "") {
         this.id = id;
         this.ejercicioId = ejercicioId;
         this.usuarioId = usuarioId;
@@ -8,6 +8,7 @@ class RegistroAvance {
         this.pesoUtilizado = pesoUtilizado;
         this.repeticionesRealizadas = repeticionesRealizadas;
         this.seriesCompletadas = seriesCompletadas;
+        this.notas = notas;
     }
 }
 

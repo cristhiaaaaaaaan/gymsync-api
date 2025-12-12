@@ -5,6 +5,7 @@ const ejercicioRoutes = require('./routes/ejercicioRoutes');
 const rutinaRoutes = require('./routes/rutinaRoutes');
 const membresiaRoutes = require('./routes/membresiaRoutes');
 const userRoutes = require('./routes/userRoutes');
+const registroAvanceRoutes = require('./routes/registroAvanceRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,12 +16,13 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.json({
         message: "GymSync API - Mobile App Backend",
-        version: "2.1.0",
+        version: "2.2.0",
         endpoints: {
             users: "/users",
             ejercicios: "/ejercicios",
             rutinas: "/rutinas",
-            membresias: "/membresias"
+            membresias: "/membresias",
+            registrosAvance: "/registros-avance"
         },
         documentation: "See README.md for full API documentation"
     });
@@ -30,6 +32,7 @@ app.use('/users', userRoutes);
 app.use('/ejercicios', ejercicioRoutes);
 app.use('/rutinas', rutinaRoutes);
 app.use('/membresias', membresiaRoutes);
+app.use('/registros-avance', registroAvanceRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
