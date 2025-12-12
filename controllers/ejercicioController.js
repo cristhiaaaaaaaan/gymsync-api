@@ -5,7 +5,15 @@ const ApiResponse = require('../util/response');
 class EjercicioController {
     getAllEjercicios(req, res) {
         try {
-            const ejercicios = ejercicioManager.getAll();
+            const { usuarioId } = req.query;
+            let ejercicios;
+
+            if (usuarioId) {
+                ejercicios = ejercicioManager.getByUsuarioId(usuarioId);
+            } else {
+                ejercicios = ejercicioManager.getAll();
+            }
+
             res.json(ApiResponse.success(ejercicios, "Ejercicios retrieved successfully"));
         } catch (error) {
             res.status(500).json(ApiResponse.error(error.message, 500));
@@ -26,13 +34,13 @@ class EjercicioController {
 
     createEjercicio(req, res) {
         try {
-            const { id, nombre, series, repeticiones, pesoRecomendado, notas } = req.body;
+            const { id, nombre, series, repeticiones, pesoRecomendado, notas, usuarioId } = req.body;
 
-            if (!id || !nombre) {
-                return res.status(400).json(ApiResponse.error("ID and nombre are required"));
+            if (!id || !nombre || !usuarioId) {
+                return res.status(400).json(ApiResponse.error("ID, nombre, and usuarioId are required"));
             }
 
-            const newEjercicio = new Ejercicio(id, nombre, series, repeticiones, pesoRecomendado, notas);
+            const newEjercicio = new Ejercicio(id, nombre, series, repeticiones, pesoRecomendado, notas, usuarioId);
             const created = ejercicioManager.add(newEjercicio);
 
             res.status(201).json(ApiResponse.created(created, "Ejercicio created successfully"));

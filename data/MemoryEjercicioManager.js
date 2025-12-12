@@ -7,13 +7,18 @@ class MemoryEjercicioManager {
     }
 
     initializeData() {
-        this.ejercicios.push(new Ejercicio("1", "Press de Banca", 4, 10, 60, "Mantener espalda pegada al banco"));
-        this.ejercicios.push(new Ejercicio("2", "Sentadillas", 4, 12, 80, "Bajar hasta 90 grados"));
-        this.ejercicios.push(new Ejercicio("3", "Peso Muerto", 3, 8, 100, "Mantener espalda recta"));
+        // Initialize with empty array - users will create their own exercises
+        // this.ejercicios.push(new Ejercicio("1", "Press de Banca", 4, 10, 60, "Mantener espalda pegada al banco", "example-user-id"));
+        // this.ejercicios.push(new Ejercicio("2", "Sentadillas", 4, 12, 80, "Bajar hasta 90 grados", "example-user-id"));
+        // this.ejercicios.push(new Ejercicio("3", "Peso Muerto", 3, 8, 100, "Mantener espalda recta", "example-user-id"));
     }
 
     getAll() {
         return this.ejercicios;
+    }
+
+    getByUsuarioId(usuarioId) {
+        return this.ejercicios.filter(ej => ej.usuarioId === usuarioId);
     }
 
     getById(id) {
@@ -41,7 +46,8 @@ class MemoryEjercicioManager {
             data.series !== undefined ? data.series : this.ejercicios[index].series,
             data.repeticiones !== undefined ? data.repeticiones : this.ejercicios[index].repeticiones,
             data.pesoRecomendado !== undefined ? data.pesoRecomendado : this.ejercicios[index].pesoRecomendado,
-            data.notas !== undefined ? data.notas : this.ejercicios[index].notas
+            data.notas !== undefined ? data.notas : this.ejercicios[index].notas,
+            this.ejercicios[index].usuarioId // Keep the same usuarioId
         );
 
         return this.ejercicios[index];
