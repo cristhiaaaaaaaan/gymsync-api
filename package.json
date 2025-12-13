@@ -7,11 +7,18 @@
     "start": "node server.js",
     "dev": "node server.js"
   },
-  "keywords": ["gym", "fitness", "api", "rest"],
+  "keywords": [
+    "gym",
+    "fitness",
+    "api",
+    "rest"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   }
 }

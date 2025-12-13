@@ -1,5 +1,8 @@
 const User = require('../models/User');
 const { readData, writeData } = require('../util/fileHandler');
+const bcrypt = require('bcrypt');
+
+const SALT_ROUNDS = 12;
 
 class UserController {
     constructor() {
@@ -9,10 +12,17 @@ class UserController {
     getAllUsers(req, res) {
         try {
             const users = readData(this.dataFile);
+            const usersWithoutPasswords = users.map(u => ({
+                id: u.id,
+                name: u.name,
+                email: u.email,
+                fotoPerfil: u.fotoPerfil,
+                fechaRegistro: u.fechaRegistro
+            }));
             res.json({
                 responseCode: 200,
                 message: "Users retrieved successfully",
-                data: users
+                data: usersWithoutPasswords
             });
         } catch (error) {
             res.status(500).json({
@@ -35,10 +45,18 @@ class UserController {
                 });
             }
 
+            const userWithoutPassword = {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                fotoPerfil: user.fotoPerfil,
+                fechaRegistro: user.fechaRegistro
+            };
+
             res.json({
                 responseCode: 200,
                 message: "User retrieved successfully",
-                data: user
+                data: userWithoutPassword
             });
         } catch (error) {
             res.status(500).json({
@@ -61,10 +79,18 @@ class UserController {
                 });
             }
 
+            const userWithoutPassword = {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                fotoPerfil: user.fotoPerfil,
+                fechaRegistro: user.fechaRegistro
+            };
+
             res.json({
                 responseCode: 200,
                 message: "User retrieved successfully",
-                data: user
+                data: userWithoutPassword
             });
         } catch (error) {
             res.status(500).json({
@@ -75,11 +101,10 @@ class UserController {
         }
     }
 
-    createUser(req, res) {
+    async createUser(req, res) {
         try {
             const users = readData(this.dataFile);
 
-            // Check if email already exists
             const existingUser = users.find(u => u.email === req.body.email);
             if (existingUser) {
                 return res.status(400).json({
@@ -88,10 +113,16 @@ class UserController {
                 });
             }
 
+            let hashedPassword = "";
+            if (req.body.password) {
+                hashedPassword = await bcrypt.hash(req.body.password, SALT_ROUNDS);
+            }
+
             const newUser = new User(
                 req.body.id,
                 req.body.name,
                 req.body.email,
+                hashedPassword,
                 req.body.fotoPerfil || "",
                 req.body.fechaRegistro || new Date()
             );
@@ -99,10 +130,18 @@ class UserController {
             users.push(newUser);
             writeData(this.dataFile, users);
 
+            const userWithoutPassword = {
+                id: newUser.id,
+                name: newUser.name,
+                email: newUser.email,
+                fotoPerfil: newUser.fotoPerfil,
+                fechaRegistro: newUser.fechaRegistro
+            };
+
             res.status(201).json({
                 responseCode: 201,
                 message: "User created successfully",
-                data: newUser
+                data: userWithoutPassword
             });
         } catch (error) {
             res.status(500).json({
@@ -113,7 +152,7 @@ class UserController {
         }
     }
 
-    updateUser(req, res) {
+    async updateUser(req, res) {
         try {
             const users = readData(this.dataFile);
             const index = users.findIndex(u => u.id === req.params.id);
@@ -125,7 +164,6 @@ class UserController {
                 });
             }
 
-            // Check if new email already exists (excluding current user)
             if (req.body.email && req.body.email !== users[index].email) {
                 const emailExists = users.find(u => u.email === req.body.email);
                 if (emailExists) {
@@ -136,19 +174,35 @@ class UserController {
                 }
             }
 
-            users[index] = {
-                ...users[index],
+            let updates = {
                 name: req.body.name || users[index].name,
                 email: req.body.email || users[index].email,
                 fotoPerfil: req.body.fotoPerfil !== undefined ? req.body.fotoPerfil : users[index].fotoPerfil
             };
 
+            if (req.body.password) {
+                updates.password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
+            }
+
+            users[index] = {
+                ...users[index],
+                ...updates
+            };
+
             writeData(this.dataFile, users);
+
+            const userWithoutPassword = {
+                id: users[index].id,
+                name: users[index].name,
+                email: users[index].email,
+                fotoPerfil: users[index].fotoPerfil,
+                fechaRegistro: users[index].fechaRegistro
+            };
 
             res.json({
                 responseCode: 200,
                 message: "User updated successfully",
-                data: users[index]
+                data: userWithoutPassword
             });
         } catch (error) {
             res.status(500).json({
